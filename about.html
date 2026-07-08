@@ -6,6 +6,7 @@
 <title>О проекте — АмурГид</title>
 <meta name="description" content="Кто ведёт АмурГид, откуда берутся цифры по лимитам и как часто они обновляются. Как сообщить об ошибке или уточнить данные.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://auvixda.github.io/heihe/about.html">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://auvixda.github.io/heihe/about.html">
@@ -23,6 +24,24 @@
   .guide-section ul { padding-left: 20px; }
   .source-list { padding-left: 20px; }
   .source-list li { margin-bottom: 8px; font-size: 0.92rem; }
+  .changelog-list { border-left: 2px solid var(--line); padding-left: 20px; }
+  .changelog-item { margin-bottom: 18px; position: relative; }
+  .changelog-item::before {
+    content: '';
+    position: absolute;
+    left: -25px; top: 5px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--amber);
+  }
+  .changelog-date {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--river);
+    margin-bottom: 4px;
+  }
+  .changelog-text { color: var(--ink-soft); font-size: 0.9rem; }
   .about-hero-note {
     display: inline-block;
     font-family: var(--font-mono);
@@ -44,6 +63,7 @@
       <a href="index.html">Главная</a>
       <a href="calculator.html">Калькулятор</a>
       <a href="guide.html">Гид по границе</a>
+      <a href="shopping.html">Перед поездкой</a>
     </nav>
   </div>
 </header>
@@ -59,14 +79,41 @@
       <p>Сайт делает и поддерживает один человек в свободное время, без штата юристов. Мы стараемся, чтобы цифры были точными, но окончательное решение по любому вопросу — всегда за таможенным инспектором на посту.</p>
     </div>
 
-    <div class="guide-section">
+    <div class="guide-section" id="sources">
       <h2>Почему цифрам можно доверять</h2>
       <p>Все нормы — не наши предположения, а выжимка из официальных источников:</p>
       <ul class="source-list">
         <li>ФТС России — раздел «Стоимостные, весовые и количественные нормы» (customs.gov.ru)</li>
         <li>Решения Совета ЕЭК — включая базовую норму 500&nbsp;€/25&nbsp;кг (действует с 01.04.2024) и порог для маркетплейс-посылок 200&nbsp;€ (с 01.07.2026)</li>
       </ul>
-      <p>Перед публикацией каждая цифра сверяется с первоисточником, а дата последней сверки видна прямо в результате калькулятора и в гиде. Если норма менялась или отменялась — например, временное повышение лимита до 1000&nbsp;€/31&nbsp;кг, которое действовало только до 01.10.2022 — мы отмечаем это явно, а не оставляем устаревшую цифру молча висеть на сайте.</p>
+      <p>Перед публикацией каждая цифра сверяется с первоисточником, а дата последней сверки видна прямо в результате калькулятора и в гиде. Если норма менялась или отменялась — например, временное повышение лимита до 1000&nbsp;€/31&nbsp;кг, которое действовало только до 01.10.2022 — мы отмечаем это явно, а не оставляем устаревшую цифру молча висеть на сайте. Полную историю изменений смотрите в разделе <a href="#changelog" style="color:var(--river); text-decoration:underline;">«Что менялось»</a> ниже.</p>
+    </div>
+
+    <div class="guide-section" id="changelog">
+      <h2>Что менялось: журнал обновлений</h2>
+      <p>Коротко — какие цифры мы проверяли и что именно поменялось. Свежее сверху.</p>
+      <div class="changelog-list">
+        <div class="changelog-item">
+          <div class="changelog-date">08.07.2026</div>
+          <div class="changelog-text">Плановая сверка с разделом ФТС «Стоимостные, весовые и количественные нормы» — базовая норма 500&nbsp;€/25&nbsp;кг подтверждена без изменений.</div>
+        </div>
+        <div class="changelog-item">
+          <div class="changelog-date">01.07.2026</div>
+          <div class="changelog-text">Вступил в силу новый порог для посылок с иностранных маркетплейсов: 200&nbsp;€ / 31&nbsp;кг без пошлины, свыше — ставка 5%. Это отдельная норма, не путать с личным багажом.</div>
+        </div>
+        <div class="changelog-item">
+          <div class="changelog-date">12.01.2026</div>
+          <div class="changelog-text">Опубликовано решение Совета ЕЭК о новом пороге для маркетплейс-посылок — добавили в справочник заранее, с пометкой даты вступления в силу.</div>
+        </div>
+        <div class="changelog-item">
+          <div class="changelog-date">27.09.2023</div>
+          <div class="changelog-text">Решение Совета ЕЭК закрепило норму 500&nbsp;€/25&nbsp;кг для личного багажа как постоянную (действует с 01.04.2024).</div>
+        </div>
+        <div class="changelog-item">
+          <div class="changelog-date">01.10.2022</div>
+          <div class="changelog-text">Закончилось временное повышение беспошлинного лимита до 1000&nbsp;€/31&nbsp;кг — норма вернулась к базовым значениям. Мы держим эту запись, чтобы никто не ориентировался на устаревшую цифру, которая всё ещё гуляет по интернету.</div>
+        </div>
+      </div>
     </div>
 
     <div class="guide-section">

@@ -354,7 +354,7 @@ function showResult(items) {
     explainEl.innerHTML = `Партия товара для перепродажи не подпадает под нормы личного пользования — она оформляется как коммерческий груз, с отдельным декларированием и пошлинами. Расчёт для физлиц здесь не применим.`;
     breakdownEl.style.display = 'none';
     breakdownEl.innerHTML = '';
-    sourceEl.textContent = 'Источник: определение коммерческой партии, ФТС России · сверено 08.07.2026';
+    sourceEl.innerHTML = 'Источник: определение коммерческой партии, ФТС России · сверено 08.07.2026 · <a href="about.html#sources" style="color:var(--river); text-decoration:underline;">как мы сверяем данные</a>';
     return;
   }
 
@@ -472,7 +472,7 @@ function showResult(items) {
   if (standardItems.length > 0) usedCategories.push('наземного/водного транспорта');
   if (alcoholItems.length > 0) usedCategories.push('алкоголя');
   if (tobaccoItems.length > 0) usedCategories.push('табака');
-  sourceEl.textContent = `Ориентировочный расчёт на основе норм ЕАЭС для ${usedCategories.join(', ')}. Точную сумму определит инспектор на посту Кани-Курган · сверено 08.07.2026`;
+  sourceEl.innerHTML = `Ориентировочный расчёт на основе норм ЕАЭС для ${usedCategories.join(', ')}. Точную сумму определит инспектор на посту Кани-Курган · сверено 08.07.2026 · <a href="about.html#sources" style="color:var(--river); text-decoration:underline;">как мы сверяем данные</a>`;
 }
 
 document.addEventListener('DOMContentLoaded', initCalculator);
