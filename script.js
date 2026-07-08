@@ -17,7 +17,7 @@ async function loadRate() {
       updatedEl.textContent = `Обновлено: ${new Date(data.Date).toLocaleDateString('ru-RU')} · ЦБ РФ`;
     }
   } catch (e) {
-    // Фолбэк, если API ЦБ недоступен — курс из data/limits.json (fallback_cny_to_eur)
+    // Фолбэк, если API ЦБ недоступен — курс из limits.json (fallback_cny_to_eur)
     rubPerCny = 12.60;
     rubPerEur = 98.50;
     if (rateEl) {
@@ -39,7 +39,7 @@ let limitsData = null;
 
 async function loadLimits() {
   try {
-    const res = await fetch('data/limits.json');
+    const res = await fetch('limits.json');
     limitsData = await res.json();
   } catch (e) {
     limitsData = {

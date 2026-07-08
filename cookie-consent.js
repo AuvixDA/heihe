@@ -1,150 +1,54 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Калькулятор таможенной пошлины — АмурГид</title>
-<meta name="description" content="Посчитайте, нужно ли платить пошлину при провозе товаров через границу Благовещенск—Хэйхэ.">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+// ===== Баннер о cookie =====
+(function () {
+  var STORAGE_KEY = 'amurgid_cookie_consent';
 
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://auvixda.github.io/heihe/calculator.html">
-<meta property="og:title" content="Калькулятор таможенной пошлины — АмурГид">
-<meta property="og:description" content="Три вопроса — и понятно, нужно ли платить пошлину на границе Благовещенск—Хэйхэ.">
-<meta property="og:image" content="https://auvixda.github.io/heihe/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
+  function hasConsent() {
+    try {
+      return localStorage.getItem(STORAGE_KEY) === 'accepted';
+    } catch (e) {
+      return false;
+    }
+  }
 
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
+  function setConsent() {
+    try {
+      localStorage.setItem(STORAGE_KEY, 'accepted');
+    } catch (e) {
+      // localStorage недоступен (приватный режим и т.п.) — просто скроем баннер на эту сессию
+    }
+  }
 
-<header class="site-header">
-  <div class="container">
-    <a class="logo" href="index.html">Амур<span class="dot">Гид</span></a>
-    <nav class="main-nav">
-      <a href="index.html">Главная</a>
-      <a href="calculator.html" class="active">Калькулятор</a>
-      <a href="guide.html">Гид по границе</a>
-    </nav>
-  </div>
-</header>
+  function showBanner() {
+    var banner = document.createElement('div');
+    banner.className = 'cookie-banner';
+    banner.setAttribute('role', 'dialog');
+    banner.setAttribute('aria-label', 'Уведомление об использовании cookie');
 
-<section class="section">
-  <div class="container">
-    <div class="section-head" style="text-align:center; margin: 0 auto 36px;">
-      <h1 style="font-size:clamp(1.6rem,3.5vw,2.4rem);">Калькулятор пошлины</h1>
-      <p>Три вопроса — и понятный ответ, без формулировок из закона.</p>
-    </div>
+    banner.innerHTML =
+      '<div class="cookie-banner-inner">' +
+        '<p>Мы используем файлы cookie для работы сайта и аналитики. ' +
+        'Продолжая пользоваться сайтом, вы соглашаетесь с ' +
+        '<a href="privacy.html">политикой конфиденциальности</a>.</p>' +
+        '<button type="button" class="btn btn-primary cookie-banner-btn" id="cookie-accept-btn">Понятно</button>' +
+      '</div>';
 
-    <div class="calc-wrap">
-      <div class="calc-progress">
-        <div class="dot done" id="dot-1"></div>
-        <div class="dot" id="dot-2"></div>
-        <div class="dot" id="dot-3"></div>
-      </div>
+    document.body.appendChild(banner);
 
-      <!-- Step 1 -->
-      <div class="calc-step active" id="step-1">
-        <div class="step-label">Шаг 1 из 3</div>
-        <h3 style="margin-bottom:6px;">Что везёте?</h3>
-        <p class="step-subtitle">От категории зависит, какой лимит применяется — по деньгам и весу или по литрам.</p>
-        <div class="category-grid" id="category-group">
-          <button class="category-card" data-value="electronics"><span class="cc-icon">📱</span>Техника</button>
-          <button class="category-card" data-value="clothing"><span class="cc-icon">👕</span>Одежда / товары</button>
-          <button class="category-card" data-value="food"><span class="cc-icon">🍬</span>Продукты</button>
-          <button class="category-card" data-value="alcohol"><span class="cc-icon">🍷</span>Алкоголь</button>
-          <button class="category-card" data-value="other"><span class="cc-icon">📦</span>Другое</button>
-        </div>
-        <div class="calc-nav">
-          <span></span>
-          <button class="btn btn-primary" id="next-1" disabled>Далее →</button>
-        </div>
-      </div>
+    document.getElementById('cookie-accept-btn').addEventListener('click', function () {
+      setConsent();
+      banner.remove();
+    });
+  }
 
-      <!-- Step 2 -->
-      <div class="calc-step" id="step-2">
-        <div class="step-label">Шаг 2 из 3</div>
-        <h3 style="margin-bottom:6px;">Стоимость и вес</h3>
-        <p class="step-subtitle" id="step2-subtitle">Считайте общую сумму и вес по всем покупкам сразу, а не по отдельным вещам.</p>
+  function init() {
+    if (!hasConsent()) {
+      showBanner();
+    }
+  }
 
-        <div id="step2-standard">
-          <div class="field">
-            <label for="value-input">Общая стоимость (в юанях, ¥)</label>
-            <input type="number" id="value-input" placeholder="Например, 3500" min="0">
-          </div>
-          <div class="field">
-            <label for="weight-input">Общий вес (кг)</label>
-            <input type="number" id="weight-input" placeholder="Например, 12" min="0">
-          </div>
-        </div>
-
-        <div id="step2-alcohol" style="display:none;">
-          <div class="field">
-            <label for="liters-input">Общее количество (в литрах)</label>
-            <input type="number" id="liters-input" placeholder="Например, 2" min="0" step="0.1">
-          </div>
-        </div>
-
-        <p id="step2-error" style="display:none; color:var(--coral); font-size:0.9rem; margin-top:-8px; margin-bottom:16px;"></p>
-
-        <div class="calc-nav">
-          <button class="btn btn-outline" id="back-2">← Назад</button>
-          <button class="btn btn-primary" id="next-2">Далее →</button>
-        </div>
-      </div>
-
-      <!-- Step 3 -->
-      <div class="calc-step" id="step-3">
-        <div class="step-label">Шаг 3 из 3</div>
-        <h3 style="margin-bottom:6px;">Это для себя или на продажу?</h3>
-        <p class="step-subtitle">Партия одинаковых товаров на перепродажу оформляется по другим правилам, не как личный багаж.</p>
-        <div class="category-grid" id="purpose-group">
-          <button class="category-card" data-value="personal"><span class="cc-icon">🎒</span>Для личного пользования</button>
-          <button class="category-card" data-value="commercial"><span class="cc-icon">📈</span>Партия на продажу</button>
-        </div>
-        <div class="calc-nav">
-          <button class="btn btn-outline" id="back-3">← Назад</button>
-          <button class="btn btn-primary" id="calc-submit" disabled>Показать результат</button>
-        </div>
-      </div>
-
-      <!-- Result -->
-      <div class="calc-step" id="step-result">
-        <div class="result-box">
-          <div class="result-status" id="result-status">РЕЗУЛЬТАТ</div>
-          <div class="result-value" id="result-value">—</div>
-          <div class="result-explain" id="result-explain"></div>
-          <div class="result-breakdown" id="result-breakdown" style="display:none;"></div>
-          <div class="verify-note">
-            <span class="verify-icon">⚠️</span>
-            <span><strong>Это ориентировочный расчёт</strong>, а не официальное решение. Точную сумму пошлины определяет таможенный инспектор на месте — уточняйте на посту при пересечении границы.</span>
-          </div>
-          <div class="result-source" id="result-source"></div>
-        </div>
-        <div class="calc-nav" style="justify-content:center;">
-          <button class="btn btn-outline" id="restart">Посчитать заново</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="ad-slot" data-ads-enabled="false" style="max-width:640px; margin:32px auto 0;">Место для рекламного блока</div>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <span>© 2026 АмурГид · Справочный сервис, не является таможенным брокером</span>
-    <span>Данные обновлены: 08.07.2026</span>
-  </div>
-
-  <div class="container footer-links">
-    <a href="about.html">О проекте</a>
-    <a href="privacy.html">Политика конфиденциальности</a>
-  </div>
-</footer>
-
-<script src="script.js"></script>
-<script src="cookie-consent.js"></script>
-</body>
-</html>
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
