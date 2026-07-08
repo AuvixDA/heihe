@@ -8,9 +8,10 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://auvixda.github.io/heihe/calculator.html">
 <meta property="og:title" content="Калькулятор таможенной пошлины — АмурГид">
 <meta property="og:description" content="Три вопроса — и понятно, нужно ли платить пошлину на границе Благовещенск—Хэйхэ.">
-<meta property="og:image" content="og-image.png">
+<meta property="og:image" content="https://auvixda.github.io/heihe/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -45,13 +46,15 @@
 
       <!-- Step 1 -->
       <div class="calc-step active" id="step-1">
-        <h3 style="margin-bottom:18px;">Что везёте?</h3>
-        <div class="choice-group" id="category-group">
-          <button class="choice-btn" data-value="electronics">📱 Техника</button>
-          <button class="choice-btn" data-value="clothing">👕 Одежда / товары</button>
-          <button class="choice-btn" data-value="food">🍬 Продукты</button>
-          <button class="choice-btn" data-value="alcohol">🍷 Алкоголь</button>
-          <button class="choice-btn" data-value="other">📦 Другое</button>
+        <div class="step-label">Шаг 1 из 3</div>
+        <h3 style="margin-bottom:6px;">Что везёте?</h3>
+        <p class="step-subtitle">От категории зависит, какой лимит применяется — по деньгам и весу или по литрам.</p>
+        <div class="category-grid" id="category-group">
+          <button class="category-card" data-value="electronics"><span class="cc-icon">📱</span>Техника</button>
+          <button class="category-card" data-value="clothing"><span class="cc-icon">👕</span>Одежда / товары</button>
+          <button class="category-card" data-value="food"><span class="cc-icon">🍬</span>Продукты</button>
+          <button class="category-card" data-value="alcohol"><span class="cc-icon">🍷</span>Алкоголь</button>
+          <button class="category-card" data-value="other"><span class="cc-icon">📦</span>Другое</button>
         </div>
         <div class="calc-nav">
           <span></span>
@@ -61,7 +64,9 @@
 
       <!-- Step 2 -->
       <div class="calc-step" id="step-2">
-        <h3 style="margin-bottom:18px;">Стоимость и вес</h3>
+        <div class="step-label">Шаг 2 из 3</div>
+        <h3 style="margin-bottom:6px;">Стоимость и вес</h3>
+        <p class="step-subtitle" id="step2-subtitle">Считайте общую сумму и вес по всем покупкам сразу, а не по отдельным вещам.</p>
 
         <div id="step2-standard">
           <div class="field">
@@ -91,10 +96,12 @@
 
       <!-- Step 3 -->
       <div class="calc-step" id="step-3">
-        <h3 style="margin-bottom:18px;">Это для себя или на продажу?</h3>
-        <div class="choice-group" id="purpose-group">
-          <button class="choice-btn" data-value="personal">🎒 Для личного пользования</button>
-          <button class="choice-btn" data-value="commercial">📈 Партия на продажу</button>
+        <div class="step-label">Шаг 3 из 3</div>
+        <h3 style="margin-bottom:6px;">Это для себя или на продажу?</h3>
+        <p class="step-subtitle">Партия одинаковых товаров на перепродажу оформляется по другим правилам, не как личный багаж.</p>
+        <div class="category-grid" id="purpose-group">
+          <button class="category-card" data-value="personal"><span class="cc-icon">🎒</span>Для личного пользования</button>
+          <button class="category-card" data-value="commercial"><span class="cc-icon">📈</span>Партия на продажу</button>
         </div>
         <div class="calc-nav">
           <button class="btn btn-outline" id="back-3">← Назад</button>
@@ -108,6 +115,12 @@
           <div class="result-status" id="result-status">РЕЗУЛЬТАТ</div>
           <div class="result-value" id="result-value">—</div>
           <div class="result-explain" id="result-explain"></div>
+          <div class="result-breakdown" id="result-breakdown" style="display:none;"></div>
+          <div class="verify-note">
+            <span class="verify-icon">⚠️</span>
+            <span><strong>Это ориентировочный расчёт</strong>, а не официальное решение. Точную сумму пошлины определяет таможенный инспектор на месте — уточняйте на посту при пересечении границы.</span>
+          </div>
+          <div class="result-source" id="result-source"></div>
         </div>
         <div class="calc-nav" style="justify-content:center;">
           <button class="btn btn-outline" id="restart">Посчитать заново</button>

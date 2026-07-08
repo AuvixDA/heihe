@@ -63,9 +63,9 @@ function initCalculator() {
   const errorEl2 = document.getElementById('step2-error');
 
   function selectChoice(group, key, onSelect) {
-    group.querySelectorAll('.choice-btn').forEach(btn => {
+    group.querySelectorAll('.category-card').forEach(btn => {
       btn.addEventListener('click', () => {
-        group.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
+        group.querySelectorAll('.category-card').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
         state[key] = btn.dataset.value;
         if (onSelect) onSelect(btn.dataset.value);
@@ -73,15 +73,19 @@ function initCalculator() {
     });
   }
 
+  const step2Subtitle = document.getElementById('step2-subtitle');
+
   selectChoice(categoryGroup, 'category', (val) => {
     document.getElementById('next-1').disabled = false;
     // Показываем нужный вариант шага 2 в зависимости от категории
     if (val === 'alcohol') {
       step2Standard.style.display = 'none';
       step2Alcohol.style.display = 'block';
+      if (step2Subtitle) step2Subtitle.textContent = 'Считайте общий объём по всем бутылкам и упаковкам сразу.';
     } else {
       step2Standard.style.display = 'block';
       step2Alcohol.style.display = 'none';
+      if (step2Subtitle) step2Subtitle.textContent = 'Считайте общую сумму и вес по всем покупкам сразу, а не по отдельным вещам.';
     }
   });
 
@@ -140,7 +144,7 @@ function initCalculator() {
 
   document.getElementById('restart').addEventListener('click', () => {
     state.category = state.value = state.weight = state.liters = state.purpose = null;
-    document.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
+    document.querySelectorAll('.category-card').forEach(b => b.classList.remove('selected'));
     document.getElementById('value-input').value = '';
     document.getElementById('weight-input').value = '';
     document.getElementById('liters-input').value = '';
@@ -158,13 +162,28 @@ function showResult() {
   const statusEl = document.getElementById('result-status');
   const valueEl = document.getElementById('result-value');
   const explainEl = document.getElementById('result-explain');
+  const breakdownEl = document.getElementById('result-breakdown');
+  const sourceEl = document.getElementById('result-source');
+
+  function setBreakdown(rows) {
+    if (!rows || !rows.length) {
+      breakdownEl.style.display = 'none';
+      breakdownEl.innerHTML = '';
+      return;
+    }
+    breakdownEl.style.display = 'block';
+    breakdownEl.innerHTML = rows.map(r =>
+      `<div class="rb-row"><span>${r[0]}</span><strong>${r[1]}</strong></div>`
+    ).join('');
+  }
 
   if (state.purpose === 'commercial') {
     statusEl.textContent = 'ВНИМАНИЕ';
     valueEl.textContent = 'Другие правила';
     valueEl.className = 'result-value warn';
-    explainEl.innerHTML = `Партия товара для перепродажи не подпадает под нормы личного пользования — она оформляется как коммерческий груз, с отдельным декларированием и пошлинами. Расчёт для физлиц здесь не применим.
-      <span class="source">Источник: определение коммерческой партии, ФТС России · сверено 08.07.2026</span>`;
+    explainEl.innerHTML = `Партия товара для перепродажи не подпадает под нормы личного пользования — она оформляется как коммерческий груз, с отдельным декларированием и пошлинами. Расчёт для физлиц здесь не применим.`;
+    setBreakdown(null);
+    sourceEl.textContent = 'Источник: определение коммерческой партии, ФТС России · сверено 08.07.2026';
     return;
   }
 
@@ -175,19 +194,30 @@ function showResult() {
     if (state.liters <= limit) {
       valueEl.textContent = 'Пошлина не нужна';
       valueEl.className = 'result-value ok';
-      explainEl.innerHTML = `${state.liters} л укладывается в беспошлинную норму — до ${limit} л на совершеннолетнего.
-        <span class="source">Источник: нормы ЕАЭС для алкоголя · сверено 08.07.2026</span>`;
+      explainEl.innerHTML = `Указанный объём укладывается в беспошлинную норму для одного совершеннолетнего.`;
+      setBreakdown([
+        ['Ваш объём', `${state.liters} л`],
+        ['Беспошлинная норма', `до ${limit} л`],
+      ]);
     } else if (state.liters <= 5) {
       valueEl.textContent = 'Нужна пошлина';
       valueEl.className = 'result-value warn';
-      explainEl.innerHTML = `От ${limit} до 5 л алкоголь провозится, но облагается пошлиной на превышение. Точную сумму рассчитает инспектор на месте.
-        <span class="source">Источник: нормы ЕАЭС для алкоголя · сверено 08.07.2026</span>`;
+      explainEl.innerHTML = `Алкоголь свыше нормы провозится, но с превышения берётся пошлина. Точную сумму рассчитает инспектор на месте.`;
+      setBreakdown([
+        ['Ваш объём', `${state.liters} л`],
+        ['Беспошлинная норма', `до ${limit} л`],
+        ['Превышение', `${(state.liters - limit).toFixed(1)} л — платно`],
+      ]);
     } else {
       valueEl.textContent = 'Провоз запрещён';
       valueEl.className = 'result-value warn';
-      explainEl.innerHTML = `Свыше 5 л алкоголя провозить нельзя без специального разрешения — превышение может быть конфисковано.
-        <span class="source">Источник: нормы ЕАЭС для алкоголя · сверено 08.07.2026</span>`;
+      explainEl.innerHTML = `Свыше 5 л алкоголя провозить нельзя без специального разрешения — превышение может быть конфисковано.`;
+      setBreakdown([
+        ['Ваш объём', `${state.liters} л`],
+        ['Максимум с пошлиной', 'до 5 л'],
+      ]);
     }
+    sourceEl.textContent = 'Источник: нормы ЕАЭС для алкоголя · сверено 08.07.2026';
     return;
   }
 
@@ -202,8 +232,13 @@ function showResult() {
   if (!overValue && !overWeight) {
     valueEl.textContent = 'Пошлина не нужна';
     valueEl.className = 'result-value ok';
-    explainEl.innerHTML = `Стоимость (~${valueEur.toFixed(0)} €) и вес (${state.weight} кг) укладываются в лимит ${limits.duty_free_value_eur} € / ${limits.duty_free_weight_kg} кг для личного багажа.
-      <span class="source">Источник: нормы ЕАЭС для наземного/водного транспорта · сверено 08.07.2026</span>`;
+    explainEl.innerHTML = `Стоимость и вес укладываются в беспошлинный лимит для личного багажа.`;
+    setBreakdown([
+      ['Ваша стоимость', `≈ ${valueEur.toFixed(0)} €`],
+      ['Ваш вес', `${state.weight} кг`],
+      ['Беспошлинный лимит', `до ${limits.duty_free_value_eur} € / ${limits.duty_free_weight_kg} кг`],
+    ]);
+    sourceEl.textContent = 'Источник: нормы ЕАЭС для наземного/водного транспорта · сверено 08.07.2026';
   } else {
     const excessEur = Math.max(0, valueEur - limits.duty_free_value_eur);
     const excessKg = Math.max(0, state.weight - limits.duty_free_weight_kg);
@@ -211,10 +246,18 @@ function showResult() {
     const dutyByWeight = excessKg * limits.excess_duty.min_rate_eur_per_kg;
     const duty = Math.max(dutyByValue, dutyByWeight);
 
+    const overWhat = overValue && overWeight ? 'по стоимости и весу' : (overValue ? 'по стоимости' : 'по весу');
+
     valueEl.textContent = `≈ ${duty.toFixed(0)} €`;
     valueEl.className = 'result-value warn';
-    explainEl.innerHTML = `Превышен ${overValue ? 'лимит по стоимости' : ''}${overValue && overWeight ? ' и ' : ''}${overWeight ? 'лимит по весу' : ''} (норма: ${limits.duty_free_value_eur} € / ${limits.duty_free_weight_kg} кг). Пошлина считается как ${limits.excess_duty.rate_percent}% от превышения стоимости либо ${limits.excess_duty.min_rate_eur_per_kg} € за кг лишнего веса — берётся большее значение.
-      <span class="source">Ориентировочный расчёт. Точную сумму определит инспектор на посту Кани-Курган · сверено 08.07.2026</span>`;
+    explainEl.innerHTML = `Превышен лимит ${overWhat}. Пошлина считается как ${limits.excess_duty.rate_percent}% от превышения стоимости либо ${limits.excess_duty.min_rate_eur_per_kg} € за кг лишнего веса — берётся большее значение.`;
+    setBreakdown([
+      ['Ваша стоимость', `≈ ${valueEur.toFixed(0)} €`],
+      ['Ваш вес', `${state.weight} кг`],
+      ['Беспошлинный лимит', `${limits.duty_free_value_eur} € / ${limits.duty_free_weight_kg} кг`],
+      ['Превышение', `${excessEur > 0 ? '≈ ' + excessEur.toFixed(0) + ' €' : ''}${excessEur > 0 && excessKg > 0 ? ' / ' : ''}${excessKg > 0 ? excessKg.toFixed(1) + ' кг' : ''}`],
+    ]);
+    sourceEl.textContent = 'Ориентировочный расчёт, точную сумму определит инспектор на посту Кани-Курган · сверено 08.07.2026';
   }
 }
 
