@@ -1,88 +1,111 @@
-{
-  "meta": {
-    "last_updated": "2026-07-08",
-    "verified_against_fts": "2026-07-08",
-    "disclaimer": "Данные носят справочный характер и основаны на нормах ЕАЭС и материалах ФТС России. Точное решение о начислении пошлины принимает сотрудник таможни на месте. Перед поездкой рекомендуем свериться с официальным сайтом ФТС России или на посту Кани-Курган.",
-    "sources": [
-      "ФТС России, раздел «Стоимостные, весовые и количественные нормы» (customs.gov.ru/fiz/pravila-peremeshheniya-tovarov)",
-      "Решение Совета ЕЭК от 27.09.2023 (базовая норма 500 €/25 кг, действует с 01.04.2024)",
-      "Решение Совета ЕЭК, опубликовано 12.01.2026 (порог для маркетплейс-посылок 200 €, ставка 5% с 01.07.2026)"
-    ],
-    "verification_note": "Встречалось временное повышение лимита до 1000 €/31 кг — проверено: эта мера действовала только до 01.10.2022 и на 2026 год неактуальна. Используем базовую норму 500 €/25 кг."
-  },
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — страница не найдена | АмурГид</title>
+<meta name="description" content="Такой страницы нет. Возможно, ссылка устарела — вернитесь на главную, к калькулятору пошлины или к гиду по переходу Благовещенск—Хэйхэ.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 
-  "personal_baggage": {
-    "description": "Товары для личного пользования, провозимые при себе через погранпереход (не почта, не маркетплейс-посылка)",
-    "land_transport": {
-      "transport_types": ["мост (автобус/личный авто)", "теплоход", "судно на воздушной подушке (пума)"],
-      "duty_free_value_eur": 500,
-      "duty_free_weight_kg": 25,
-      "note": "Базовая норма ЕАЭС для наземного/водного транспорта, сверена с разделом ФТС на 08.07.2026.",
-      "excess_duty": {
-        "rate_percent": 15,
-        "min_rate_eur_per_kg": 4
-      }
-    },
-    "penalty_if_not_declared": {
-      "fine_rub_min": 1000,
-      "fine_rub_max": 2500,
-      "fine_alt_percent_of_value": "от 50% до 200% стоимости товара — при серьёзном нарушении, вплоть до конфискации",
-      "note": "Штраф грозит именно за недекларирование, а не за сам факт превышения — превышение просто нужно задекларировать и оплатить пошлину"
-    },
-    "alcohol": {
-      "duty_free_liters": 3,
-      "min_age": 18,
-      "note": "От 3 до 5 л — по ставке пошлины, свыше 5 л — запрещено к ввозу без спецразрешения"
-    },
-    "tobacco": {
-      "duty_free_cigarettes": 200,
-      "duty_free_cigars": 50,
-      "duty_free_tobacco_grams": 250,
-      "note": "Выбирается ОДИН вид товара, не суммируется"
-    },
-    "cash_declaration_threshold_usd": 10000
-  },
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://auvixda.github.io/heihe/404.html">
+<meta property="og:title" content="404 — страница не найдена | АмурГид">
+<meta property="og:description" content="Такой страницы нет. Возможно, ссылка устарела — вернитесь на главную, к калькулятору пошлины или к гиду по переходу Благовещенск—Хэйхэ.">
+<meta property="og:image" content="https://auvixda.github.io/heihe/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 
-  "marketplace_parcels": {
-    "description": "Товары, заказанные на иностранных маркетплейсах и доставленные почтой/курьером — ДРУГОЙ регламент, не путать с личным багажом",
-    "duty_free_value_eur": 200,
-    "duty_free_weight_kg": 31,
-    "effective_date": "2026-07-01",
-    "note": "Порог зафиксирован с 1 июля 2026 г., решением ЕЭК может быть пересмотрен — проверять периодически",
-    "excess_duty": {
-      "rate_percent": 5,
-      "min_rate_eur_per_kg": 1
-    }
-  },
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-  "categories": {
-    "electronics": {
-      "rule": "1 единица техники на человека (телефон, ноутбук, фотоаппарат) — свободно, если товар не новый / без заводской упаковки",
-      "risk": "Новая техника в упаковке с биркой может быть расценена как коммерческая партия"
-    },
-    "clothing": {
-      "rule": "В пределах общего лимита по стоимости/весу. Более 3 одинаковых единиц — риск переквалификации в коммерческую партию"
-    },
-    "food": {
-      "prohibited_import_to_china": ["свежее мясо", "молочные продукты", "свежие фрукты", "свежие овощи"],
-      "allowed_import_to_china": ["конфеты", "шоколад", "сухие смеси в заводской упаковке"],
-      "allowed_export_from_china": ["чай", "специи", "консервы в заводской упаковке"]
-    },
-    "cultural_values": {
-      "rule": "Подлежат обязательному декларированию независимо от стоимости и вида транспорта"
-    }
-  },
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="index.html">Амур<span class="dot">Гид</span></a>
+    <nav class="main-nav">
+      <a href="index.html">Главная</a>
+      <a href="calculator.html">Калькулятор</a>
+      <a href="guide.html">Гид по границе</a>
+    </nav>
+  </div>
+</header>
 
-  "exchange_rates_note": {
-    "description": "Курс юаня и евро сайт получает динамически из API ЦБ РФ (cbr-xml-daily.ru) в момент расчёта — здесь ничего хардкодить не нужно, поле оставлено для документации.",
-    "fallback_cny_to_eur": 0.128,
-    "fallback_note": "Используется только если API ЦБ недоступен"
-  },
+<section class="hero" style="padding-bottom:20px;">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">Пост «Кани-Курган» · контроль не пройден</span>
+      <h1>Эту страницу завернули на границе</h1>
+      <p class="lead">По такому адресу ничего нет — либо ссылка устарела, либо в адресе опечатка. Пропускаем вас на проверенные маршруты:</p>
+      <div class="hero-actions">
+        <a href="index.html" class="btn btn-primary">На главную →</a>
+        <a href="calculator.html" class="btn btn-outline">Открыть калькулятор</a>
+      </div>
+    </div>
 
-  "commercial_vs_personal": {
-    "description": "Ключевое отличие, определяющее весь расчёт",
-    "personal_signs": ["1-2 единицы товара", "разные модели/цвета", "видны следы использования (для б/у)"],
-    "commercial_signs": ["3+ одинаковых единицы", "заводская упаковка с бирками", "оптовая тара"],
-    "note": "Финальное решение — на усмотрение таможенного инспектора"
-  }
-}
+    <div class="rate-card" style="text-align:center;">
+      <div class="rate-label">Код ошибки</div>
+      <div class="rate-value" style="font-size:3.4rem;">404</div>
+      <div class="rate-updated">Not Found · страница не существует</div>
+      <div class="rate-divider"></div>
+      <p style="font-size:0.85rem; color:var(--ink-soft);">Даже опытные путешественники иногда сворачивают не туда. Главное — не в объезд поста, а обратно на сайт 🙂</p>
+    </div>
+  </div>
+</section>
+
+<svg class="river-divider" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" fill="#1B4B5A" opacity="0.08"></path>
+  <path d="M0,40 C240,10 480,55 720,25 C960,-5 1200,45 1440,15 L1440,60 L0,60 Z" fill="#E8973D" opacity="0.10"></path>
+</svg>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head" style="margin-bottom:20px;">
+      <h2 style="font-size:1.3rem;">Возможно, вы искали</h2>
+    </div>
+    <div class="topic-bar">
+      <a class="topic-btn" href="guide.html#topic-limits">
+        <span class="topic-icon">🧳</span>
+        <span>
+          <span class="topic-title">Лимиты</span>
+          <span class="topic-desc">Сколько можно провезти бесплатно и что нельзя ввозить</span>
+        </span>
+      </a>
+      <a class="topic-btn" href="guide.html#topic-crossing">
+        <span class="topic-icon">🛂</span>
+        <span>
+          <span class="topic-title">Оформление</span>
+          <span class="topic-desc">Как проходит контроль на границе, шаг за шагом</span>
+        </span>
+      </a>
+      <a class="topic-btn" href="guide.html#topic-schedule">
+        <span class="topic-icon">🚢</span>
+        <span>
+          <span class="topic-title">Расписание</span>
+          <span class="topic-desc">Теплоходы, автобусы через мост и «пумы»</span>
+        </span>
+      </a>
+    </div>
+
+    <div class="verify-note" style="margin-top:28px;">
+      <span class="verify-icon">💡</span>
+      <span><strong>Нашли битую ссылку?</strong> Страница могла переехать или устареть — начните с <a href="index.html" style="color:var(--river); text-decoration:underline;">главной</a>, там собраны все актуальные разделы.</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <span>© 2026 АмурГид · Справочный сервис, не является таможенным брокером</span>
+    <span>Данные обновлены: 08.07.2026</span>
+  </div>
+
+  <div class="container footer-links">
+    <a href="about.html">О проекте</a>
+    <a href="privacy.html">Политика конфиденциальности</a>
+  </div>
+</footer>
+
+<script src="cookie-consent.js"></script>
+</body>
+</html>
