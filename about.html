@@ -3,32 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Страница не найдена — АмурГид</title>
-<meta name="robots" content="noindex">
+<title>О проекте — АмурГид</title>
+<meta name="description" content="Кто ведёт АмурГид, откуда берутся цифры по лимитам и как часто они обновляются. Как сообщить об ошибке или уточнить данные.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://auvixda.github.io/heihe/about.html">
+<meta property="og:title" content="О проекте — АмурГид">
+<meta property="og:description" content="Кто ведёт АмурГид, откуда берутся цифры по лимитам и как часто они обновляются.">
+<meta property="og:image" content="https://auvixda.github.io/heihe/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-  .notfound {
-    min-height: 60vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 60px 20px;
-  }
-  .notfound .code {
+  .guide-section { margin-bottom: 40px; }
+  .guide-section h2 { margin-bottom: 14px; font-size: 1.2rem; }
+  .guide-section p, .guide-section li { color: var(--ink-soft); margin-bottom: 10px; }
+  .guide-section ul { padding-left: 20px; }
+  .source-list { padding-left: 20px; }
+  .source-list li { margin-bottom: 8px; font-size: 0.92rem; }
+  .about-hero-note {
+    display: inline-block;
     font-family: var(--font-mono);
-    font-size: 4.5rem;
-    font-weight: 700;
-    color: var(--amber);
-    line-height: 1;
-    margin-bottom: 16px;
+    font-size: 0.78rem;
+    color: var(--river);
+    background: rgba(27,75,90,0.08);
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 6px;
   }
-  .notfound p { color: var(--ink-soft); max-width: 44ch; margin-bottom: 28px; }
-  .notfound-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
 </style>
 </head>
 <body>
@@ -44,19 +48,49 @@
   </div>
 </header>
 
-<div class="container notfound">
-  <div class="code">404</div>
-  <h1 style="margin-bottom:12px;">Такой страницы нет</h1>
-  <p>Возможно, ссылка устарела или в адресе опечатка. Попробуйте начать с главной или сразу открыть калькулятор пошлины.</p>
-  <div class="notfound-actions">
-    <a href="index.html" class="btn btn-primary">На главную</a>
-    <a href="calculator.html" class="btn btn-outline">Открыть калькулятор</a>
+<section class="section">
+  <div class="container" style="max-width: 780px;">
+    <h1 style="margin-bottom:10px;">О проекте</h1>
+    <p style="color:var(--ink-soft); margin-bottom:40px;">Кто это делает, откуда цифры и куда писать, если что-то не так.</p>
+
+    <div class="guide-section">
+      <h2>Что такое АмурГид</h2>
+      <p>АмурГид — независимый справочный сайт про переход Благовещенск—Хэйхэ (пост Кани-Курган). Мы не таможенный брокер, не турагентство и не связаны с ФТС России или пограничной службой — это самостоятельный некоммерческий проект для тех, кто едет через границу и хочет заранее понимать правила, а не гадать на месте.</p>
+      <p>Сайт делает и поддерживает один человек в свободное время, без штата юристов. Мы стараемся, чтобы цифры были точными, но окончательное решение по любому вопросу — всегда за таможенным инспектором на посту.</p>
+    </div>
+
+    <div class="guide-section">
+      <h2>Почему цифрам можно доверять</h2>
+      <p>Все нормы — не наши предположения, а выжимка из официальных источников:</p>
+      <ul class="source-list">
+        <li>ФТС России — раздел «Стоимостные, весовые и количественные нормы» (customs.gov.ru)</li>
+        <li>Решения Совета ЕЭК — включая базовую норму 500&nbsp;€/25&nbsp;кг (действует с 01.04.2024) и порог для маркетплейс-посылок 200&nbsp;€ (с 01.07.2026)</li>
+      </ul>
+      <p>Перед публикацией каждая цифра сверяется с первоисточником, а дата последней сверки видна прямо в результате калькулятора и в гиде. Если норма менялась или отменялась — например, временное повышение лимита до 1000&nbsp;€/31&nbsp;кг, которое действовало только до 01.10.2022 — мы отмечаем это явно, а не оставляем устаревшую цифру молча висеть на сайте.</p>
+    </div>
+
+    <div class="guide-section">
+      <h2>Как часто обновляются данные</h2>
+      <p>Мы вручную проверяем нормы на актуальность и обновляем их при изменении законодательства ЕАЭС или правил ФТС — обычно это происходит не чаще, чем раз в несколько месяцев, но мы можем внести правку и в тот же день, если узнали об изменении. Дата последней сверки указана в подвале каждой страницы и в результате калькулятора.</p>
+      <p>Расписание переправы (теплоходы, автобусы, «пумы») меняется чаще — по сезону и погоде, поэтому в гиде оно помечено как ориентировочное, а точное расписание на день поездки лучше уточнять по телефону справочной, указанному в соответствующем разделе.</p>
+    </div>
+
+    <div class="guide-section">
+      <h2>Нашли ошибку или устаревшую цифру?</h2>
+      <p>Сообщите об этом через Issues в репозитории проекта на GitHub — так же, как описано в <a href="privacy.html" style="color:var(--river); text-decoration:underline;">политике конфиденциальности</a>. Мы читаем все обращения и стараемся поправить неточности как можно быстрее.</p>
+    </div>
+
+    <div class="verify-note">
+      <span class="verify-icon">⚠️</span>
+      <span><strong>АмурГид — справочный сервис, а не таможенный брокер.</strong> Мы не оформляем документы и не принимаем решений о начислении пошлины — только помогаем сориентироваться заранее. Финальное решение всегда принимает сотрудник таможни на месте.</span>
+    </div>
   </div>
-</div>
+</section>
 
 <footer>
   <div class="container">
     <span>© 2026 АмурГид · Справочный сервис, не является таможенным брокером</span>
+    <span>Данные обновлены: 08.07.2026</span>
   </div>
   <div class="container footer-links">
     <a href="about.html">О проекте</a>
