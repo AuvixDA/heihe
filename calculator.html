@@ -3,25 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>О проекте — АмурГид</title>
-<meta name="description" content="Что такое АмурГид, откуда данные о курсе и пошлинах, и как сообщить об ошибке.">
+<title>Калькулятор таможенной пошлины — АмурГид</title>
+<meta name="description" content="Посчитайте, нужно ли платить пошлину при провозе товаров через границу Благовещенск—Хэйхэ.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://auvixda.github.io/heihe/about.html">
-<meta property="og:title" content="О проекте — АмурГид">
-<meta property="og:description" content="Что такое АмурГид, откуда данные, и как сообщить об ошибке.">
+<meta property="og:url" content="https://auvixda.github.io/heihe/calculator.html">
+<meta property="og:title" content="Калькулятор таможенной пошлины — АмурГид">
+<meta property="og:description" content="Три вопроса — и понятно, нужно ли платить пошлину на границе Благовещенск—Хэйхэ.">
 <meta property="og:image" content="https://auvixda.github.io/heihe/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<style>
-  .guide-section { margin-bottom: 48px; }
-  .guide-section h2 { margin-bottom: 16px; }
-  .guide-section p, .guide-section li { color: var(--ink-soft); margin-bottom: 10px; }
-  .guide-section ul { padding-left: 20px; }
-</style>
 </head>
 <body>
 
@@ -30,42 +24,111 @@
     <a class="logo" href="index.html">Амур<span class="dot">Гид</span></a>
     <nav class="main-nav">
       <a href="index.html">Главная</a>
-      <a href="calculator.html">Калькулятор</a>
+      <a href="calculator.html" class="active">Калькулятор</a>
       <a href="guide.html">Гид по границе</a>
     </nav>
   </div>
 </header>
 
 <section class="section">
-  <div class="container" style="max-width: 820px;">
-    <h1 style="margin-bottom:10px;">О проекте</h1>
-    <p style="color:var(--ink-soft); margin-bottom:40px;">Кто и зачем сделал АмурГид, и на что можно опираться, а на что — нет.</p>
-
-    <div class="guide-section">
-      <h2>Что это</h2>
-      <p>АмурГид — небольшой справочный сайт для тех, кто едет из Благовещенска в Хэйхэ и обратно: туристов, шопперов и всех, кому нужно быстро прикинуть, попадают ли покупки в беспошлинный лимит.</p>
-      <p>Сайт независимый и некоммерческий на старте. Мы не берём деньги за размещение и не продаём туры, страховки или помощь с оформлением.</p>
+  <div class="container">
+    <div class="section-head" style="text-align:center; margin: 0 auto 36px;">
+      <h1 style="font-size:clamp(1.6rem,3.5vw,2.4rem);">Калькулятор пошлины</h1>
+      <p>Три вопроса — и понятный ответ, без формулировок из закона.</p>
     </div>
 
-    <div class="guide-section">
-      <h2>Мы не таможенный брокер</h2>
-      <p>Калькулятор и гид на этом сайте — справочный инструмент, а не юридическая консультация и не официальный источник. Итоговое решение о размере пошлины всегда принимает таможня на переходе — цифры на сайте помогают сориентироваться заранее, но не заменяют консультацию на месте.</p>
+    <div class="calc-wrap">
+      <div class="calc-progress">
+        <div class="dot done" id="dot-1"></div>
+        <div class="dot" id="dot-2"></div>
+        <div class="dot" id="dot-3"></div>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="calc-step active" id="step-1">
+        <div class="step-label">Шаг 1 из 3</div>
+        <h3 style="margin-bottom:6px;">Что везёте?</h3>
+        <p class="step-subtitle">От категории зависит, какой лимит применяется — по деньгам и весу или по литрам.</p>
+        <div class="category-grid" id="category-group">
+          <button class="category-card" data-value="electronics"><span class="cc-icon">📱</span>Техника</button>
+          <button class="category-card" data-value="clothing"><span class="cc-icon">👕</span>Одежда / товары</button>
+          <button class="category-card" data-value="food"><span class="cc-icon">🍬</span>Продукты</button>
+          <button class="category-card" data-value="alcohol"><span class="cc-icon">🍷</span>Алкоголь</button>
+          <button class="category-card" data-value="other"><span class="cc-icon">📦</span>Другое</button>
+        </div>
+        <div class="calc-nav">
+          <span></span>
+          <button class="btn btn-primary" id="next-1" disabled>Далее →</button>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="calc-step" id="step-2">
+        <div class="step-label">Шаг 2 из 3</div>
+        <h3 style="margin-bottom:6px;">Стоимость и вес</h3>
+        <p class="step-subtitle" id="step2-subtitle">Считайте общую сумму и вес по всем покупкам сразу, а не по отдельным вещам.</p>
+
+        <div id="step2-standard">
+          <div class="field">
+            <label for="value-input">Общая стоимость (в юанях, ¥)</label>
+            <input type="number" id="value-input" placeholder="Например, 3500" min="0">
+          </div>
+          <div class="field">
+            <label for="weight-input">Общий вес (кг)</label>
+            <input type="number" id="weight-input" placeholder="Например, 12" min="0">
+          </div>
+        </div>
+
+        <div id="step2-alcohol" style="display:none;">
+          <div class="field">
+            <label for="liters-input">Общее количество (в литрах)</label>
+            <input type="number" id="liters-input" placeholder="Например, 2" min="0" step="0.1">
+          </div>
+        </div>
+
+        <p id="step2-error" style="display:none; color:var(--coral); font-size:0.9rem; margin-top:-8px; margin-bottom:16px;"></p>
+
+        <div class="calc-nav">
+          <button class="btn btn-outline" id="back-2">← Назад</button>
+          <button class="btn btn-primary" id="next-2">Далее →</button>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="calc-step" id="step-3">
+        <div class="step-label">Шаг 3 из 3</div>
+        <h3 style="margin-bottom:6px;">Это для себя или на продажу?</h3>
+        <p class="step-subtitle">Партия одинаковых товаров на перепродажу оформляется по другим правилам, не как личный багаж. Учтите: если вы возите одно и то же часто и помногу, это тоже может считаться коммерческим ввозом — даже когда одна поездка укладывается в лимит. Подробнее — в разделе <a href="guide.html#topic-limits" style="color:var(--river); text-decoration:underline;">«Гид»</a>.</p>
+        <div class="category-grid" id="purpose-group">
+          <button class="category-card" data-value="personal"><span class="cc-icon">🎒</span>Для личного пользования</button>
+          <button class="category-card" data-value="commercial"><span class="cc-icon">📈</span>Партия на продажу</button>
+        </div>
+        <div class="calc-nav">
+          <button class="btn btn-outline" id="back-3">← Назад</button>
+          <button class="btn btn-primary" id="calc-submit" disabled>Показать результат</button>
+        </div>
+      </div>
+
+      <!-- Result -->
+      <div class="calc-step" id="step-result">
+        <div class="result-box">
+          <div class="result-status" id="result-status">РЕЗУЛЬТАТ</div>
+          <div class="result-value" id="result-value">—</div>
+          <div class="result-explain" id="result-explain"></div>
+          <div class="result-breakdown" id="result-breakdown" style="display:none;"></div>
+          <div class="verify-note">
+            <span class="verify-icon">⚠️</span>
+            <span><strong>Это ориентировочный расчёт</strong>, а не официальное решение. Точную сумму пошлины определяет таможенный инспектор на месте — уточняйте на посту при пересечении границы.</span>
+          </div>
+          <div class="result-source" id="result-source"></div>
+        </div>
+        <div class="calc-nav" style="justify-content:center;">
+          <button class="btn btn-outline" id="restart">Посчитать заново</button>
+        </div>
+      </div>
     </div>
 
-    <div class="guide-section">
-      <h2>Откуда данные</h2>
-      <ul>
-        <li>Курс юаня — с открытого зеркала официального курса ЦБ РФ</li>
-        <li>Таможенные лимиты — из действующих норм провоза товаров физлицами для личного пользования</li>
-        <li>Расписание переправы — из открытых источников (сайт «Амурассо», расписания теплоходов и автобусов); может отставать от факта, особенно в межсезонье</li>
-      </ul>
-      <p>Мы стараемся обновлять цифры регулярно, но если что-то изменилось на границе, а на сайте — ещё нет, сообщите нам об этом.</p>
-    </div>
-
-    <div class="guide-section">
-      <h2>Нашли ошибку или неточность?</h2>
-      <p>Если расписание, курс или лимит на сайте не совпадают с тем, что вы увидели на месте — напишите нам, мы поправим. Пока лучший способ — оставить сообщение через Issues в репозитории проекта на GitHub.</p>
-    </div>
+    <div class="ad-slot" data-ads-enabled="false" style="max-width:640px; margin:32px auto 0;">Место для рекламного блока</div>
   </div>
 </section>
 
@@ -74,12 +137,14 @@
     <span>© 2026 АмурГид · Справочный сервис, не является таможенным брокером</span>
     <span>Данные обновлены: 08.07.2026</span>
   </div>
+
   <div class="container footer-links">
     <a href="about.html">О проекте</a>
     <a href="privacy.html">Политика конфиденциальности</a>
   </div>
 </footer>
 
+<script src="script.js"></script>
 <script src="cookie-consent.js"></script>
 </body>
 </html>
