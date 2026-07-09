@@ -48,11 +48,14 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-body);
-  background: var(--sky);
+  background-color: var(--sky);
   background-image:
+    url('images/bg-pattern.svg'),
     linear-gradient(rgba(20,40,60,0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(20,40,60,0.05) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-repeat: repeat;
+  background-size: 480px 480px, 28px 28px, 28px 28px;
+  background-position: 0 0, 0 0, 0 0;
   color: var(--ink);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
