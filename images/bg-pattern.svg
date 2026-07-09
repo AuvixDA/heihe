@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="480" viewBox="0 0 480 480">
+  <g transform="translate(90 110) rotate(-14)">
+    <circle r="40" fill="none" stroke="#14283B" stroke-opacity="0.16" stroke-width="2.2" stroke-dasharray="4 5"/>
+    <circle r="29" fill="none" stroke="#14283B" stroke-opacity="0.11" stroke-width="1.6"/>
+    <line x1="-17" y1="0" x2="17" y2="0" stroke="#14283B" stroke-opacity="0.13" stroke-width="1.6"/>
+    <line x1="0" y1="-9" x2="0" y2="9" stroke="#14283B" stroke-opacity="0.11" stroke-width="1.4"/>
+  </g>
+
+  <g transform="translate(362 338) rotate(10)">
+    <circle r="27" fill="none" stroke="#D98A2B" stroke-opacity="0.20" stroke-width="2.2" stroke-dasharray="3 4"/>
+    <path d="M-10 0 L-3 8 L12 -10" fill="none" stroke="#D98A2B" stroke-opacity="0.18" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <path d="M18 402 C 110 350, 190 418, 252 298 S 412 168, 442 44" fill="none" stroke="#14283B" stroke-opacity="0.14" stroke-width="1.6" stroke-dasharray="1 7" stroke-linecap="round"/>
+  <circle cx="18" cy="402" r="3.2" fill="#14283B" fill-opacity="0.22"/>
+  <circle cx="252" cy="298" r="3.2" fill="#14283B" fill-opacity="0.22"/>
+  <circle cx="442" cy="44" r="3.2" fill="#14283B" fill-opacity="0.22"/>
+  <g transform="translate(206 353) rotate(-32)">
+    <path d="M-8 -8 L8 0 L-8 8 Z" fill="#D98A2B" fill-opacity="0.24"/>
+  </g>
+
+  <g transform="translate(432 432)">
+    <circle r="12" fill="none" stroke="#C8272C" stroke-opacity="0.18" stroke-width="1.6"/>
+    <path d="M-4.5 -7 L-4.5 7 M-4.5 -7 L5.5 -3.5 L-4.5 0" fill="none" stroke="#C8272C" stroke-opacity="0.18" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g transform="translate(30 30) rotate(6)">
+    <circle r="16" fill="none" stroke="#14283B" stroke-opacity="0.11" stroke-width="1.3" stroke-dasharray="2 4"/>
+  </g>
+</svg>
